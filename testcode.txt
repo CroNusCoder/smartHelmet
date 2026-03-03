@@ -90,3 +90,30 @@ void loop() {
 
   delay(500);
 }
+
+
+for fsr:
+
+const int fsrPin = 34;     // Analog pin
+const float VCC = 3.3;     // ESP32 voltage
+const int ADC_RES = 4095;  // 12-bit ADC
+
+void setup() {
+  Serial.begin(115200);
+}
+
+void loop() {
+  int fsrValue = analogRead(fsrPin);
+
+  // Convert to voltage
+  float voltage = (fsrValue * VCC) / ADC_RES;
+
+  Serial.print("Raw ADC: ");
+  Serial.print(fsrValue);
+
+  Serial.print(" | Voltage: ");
+  Serial.print(voltage);
+  Serial.println(" V");
+
+  delay(500);
+}
