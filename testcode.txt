@@ -117,3 +117,32 @@ void loop() {
 
   delay(500);
 }
+
+
+const int fsrPin = 34;
+
+void setup() {
+  Serial.begin(115200);
+}
+
+void loop() {
+  int fsrValue = analogRead(fsrPin);
+
+  Serial.print("FSR Value: ");
+  Serial.print(fsrValue);
+
+  if (fsrValue < 200) {
+    Serial.println("  -> No Pressure");
+  }
+  else if (fsrValue < 1500) {
+    Serial.println("  -> Light Pressure");
+  }
+  else if (fsrValue < 3000) {
+    Serial.println("  -> Medium Pressure");
+  }
+  else {
+    Serial.println("  -> High Pressure");
+  }
+
+  delay(300);
+}
