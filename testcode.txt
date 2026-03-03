@@ -178,3 +178,30 @@ void loop() {
     digitalWrite(ledPin, LOW);
   }
 }
+
+
+
+
+const int irPin = 27;     // IR sensor output
+const int ledPin = 2;     // LED pin
+
+void setup() {
+  pinMode(irPin, INPUT);
+  pinMode(ledPin, OUTPUT);
+  Serial.begin(115200);
+}
+
+void loop() {
+  int irState = digitalRead(irPin);
+
+  // Most IR sensors give LOW when object detected
+  if (irState == LOW) {
+    digitalWrite(ledPin, HIGH);
+    delay(200);
+    digitalWrite(ledPin, LOW);
+    delay(200);
+  } 
+  else {
+    digitalWrite(ledPin, LOW);
+  }
+}
