@@ -146,3 +146,35 @@ void loop() {
 
   delay(300);
 }
+
+
+
+for fsr blinking:
+const int fsrPin = 34;
+const int ledPin = 2;
+const int threshold = 1000;
+
+unsigned long previousMillis = 0;
+const long interval = 200;
+bool ledState = false;
+
+void setup() {
+  pinMode(ledPin, OUTPUT);
+  Serial.begin(115200);
+}
+
+void loop() {
+  int fsrValue = analogRead(fsrPin);
+
+  if (fsrValue > threshold) {
+    unsigned long currentMillis = millis();
+    if (currentMillis - previousMillis >= interval) {
+      previousMillis = currentMillis;
+      ledState = !ledState;
+      digitalWrite(ledPin, ledState);
+    }
+  } 
+  else {
+    digitalWrite(ledPin, LOW);
+  }
+}
