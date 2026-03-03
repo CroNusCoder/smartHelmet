@@ -1,0 +1,92 @@
+for port:
+
+void setup() {
+  Serial.begin(115200);
+}
+
+void loop() {
+  Serial.println("ESP32 Working...");
+  delay(1000);
+}
+
+for ir:
+
+#define IR_PIN 4
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(IR_PIN, INPUT);
+}
+
+void loop() {
+  int irValue = digitalRead(IR_PIN);
+
+  if (irValue == 0) {
+    Serial.println("Helmet WORN");
+  } else {
+    Serial.println("Helmet NOT WORN");
+  }
+
+  delay(500);
+}
+
+for mq3:
+
+#define MQ3_PIN 34
+
+void setup() {
+  Serial.begin(115200);
+}
+
+void loop() {
+  int alcoholValue = analogRead(MQ3_PIN);
+  Serial.print("Alcohol Level: ");
+  Serial.println(alcoholValue);
+  delay(1000);
+}
+
+for buzzer:
+
+#define BUZZER 5
+
+void setup() {
+  pinMode(BUZZER, OUTPUT);
+}
+
+void loop() {
+  digitalWrite(BUZZER, HIGH);
+  delay(500);
+  digitalWrite(BUZZER, LOW);
+  delay(1000);
+}
+
+
+for mpu6050:
+
+#include <Wire.h>
+#include <MPU6050.h>
+
+MPU6050 mpu;
+
+void setup() {
+  Serial.begin(115200);
+  Wire.begin();
+  mpu.initialize();
+
+  if (mpu.testConnection()) {
+    Serial.println("MPU6050 Connected");
+  } else {
+    Serial.println("MPU6050 Failed");
+  }
+}
+
+void loop() {
+  int16_t ax, ay, az;
+  mpu.getAcceleration(&ax, &ay, &az);
+
+  Serial.print("Accel X: "); Serial.print(ax);
+  Serial.print(" Y: "); Serial.print(ay);
+  Serial.print(" Z: "); Serial.println(az);
+
+  delay(500);
+}
